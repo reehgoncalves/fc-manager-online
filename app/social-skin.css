@@ -1,0 +1,31 @@
+.social-grid{align-items:stretch}
+.market-news-panel,.achievements-panel{min-height:100%}
+.catalog-live{display:inline-flex;align-items:center;gap:7px;color:#7390a1;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
+.catalog-live i{width:7px;height:7px;border-radius:50%;background:#f0b74a;box-shadow:0 0 0 4px rgba(240,183,74,.14)}
+.catalog-live.live i{background:#17aa90;box-shadow:0 0 0 4px rgba(23,170,144,.14)}
+.catalog-live.fallback i{background:#ed7664}
+.market-news-list{display:grid;gap:0}
+.market-news-item{display:grid;grid-template-columns:36px 1fr auto;gap:12px;align-items:center;padding:14px 0;border-top:1px solid #e2ebef}
+.market-news-item>div{min-width:0;display:grid;gap:4px}
+.market-news-item strong{color:#25465d;font-size:13px}
+.market-news-item small,.market-news-item div>span{color:#7a92a2;font-size:11px}
+.news-kind{display:grid;place-items:center;width:34px;height:34px;border-radius:12px;background:#e9f8f4;color:#15977f;font-weight:900}
+.news-kind.oferta{background:#fff0ec;color:#e27865}.news-kind.trofeu{background:#fff7df;color:#c38a1d}
+.market-news-item button{border:0;border-radius:8px;padding:8px 10px;background:#eef9f6;color:#128e7b;font-size:11px;font-weight:800;cursor:pointer}
+.achievement-count{color:#128f7c;font-size:14px;font-weight:900}
+.achievement-list{display:grid;gap:14px}
+.achievement-row{display:grid;grid-template-columns:36px 1fr auto;gap:11px;align-items:center}
+.achievement-row>div{min-width:0;display:grid;gap:4px}.achievement-row strong{color:#25465d;font-size:13px}
+.achievement-row small{color:#7a92a2;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.achievement-row>b{color:#718b9d;font-size:11px}
+.achievement-icon{display:grid;place-items:center;width:34px;height:34px;border-radius:11px;font-weight:900;background:#e7f9f3;color:#13937b}
+.achievement-icon.gold{background:#fff5d9;color:#be871b}.achievement-icon.coral{background:#fff0ec;color:#de7565}
+.achievement-track{height:5px;border-radius:99px;background:#e5eef1;overflow:hidden}.achievement-track span{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#4dc9ae,#8ce2c9)}
+.trophy-strip{display:flex;align-items:center;gap:9px;margin-top:20px;padding-top:14px;border-top:1px solid #e2ebef}.trophy-strip .eyebrow{margin-right:auto}
+.trophy-chip{display:grid;place-items:center;width:30px;height:30px;border-radius:10px;background:#fff5d9;color:#bd8519;font-weight:900;box-shadow:inset 0 0 0 1px #efdc9f}
+.trophy-chip.diamond{background:#eaf7fc;color:#3599b8;box-shadow:inset 0 0 0 1px #b9e0ed}.trophy-chip.coral{background:#fff0ec;color:#dc7667;box-shadow:inset 0 0 0 1px #f3c5bc}
+@media(max-width:760px){.game-nav{grid-template-columns:repeat(4,minmax(0,1fr))}.market-news-item{grid-template-columns:32px 1fr}.market-news-item button{grid-column:2;justify-self:start}.social-grid{grid-template-columns:1fr}}
+.league-flag img{display:block;width:28px;height:20px;object-fit:cover;border-radius:4px;box-shadow:0 3px 8px rgba(30,70,90,.18)}
+.standing-flag{width:22px;height:15px;object-fit:cover;border-radius:3px;box-shadow:0 2px 6px rgba(30,70,90,.14);vertical-align:middle;margin-right:7px}
+.career-social-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);gap:18px;margin-top:22px}.career-news,.career-achievements{padding:22px;border:1px solid #dce8ef;border-radius:22px;background:#fff;box-shadow:0 12px 28px rgba(33,72,100,.06)}.game-section-heading.compact{margin:0 0 12px}.career-news-row{display:grid;grid-template-columns:36px 1fr;gap:11px;padding:13px 0;border-top:1px solid #e2ebef}.career-news-row>div{display:grid;gap:4px}.career-news-row strong{color:#25465d;font-size:13px}.career-news-row small,.career-news-row div>span{color:#7a92a2;font-size:11px}.career-points{color:#128f7c;font-size:13px}.career-achievement-grid{display:grid;gap:12px}.career-achievement{display:grid;grid-template-columns:34px 1fr;gap:5px 9px;align-items:center}.career-achievement .achievement-icon{grid-row:span 2}.career-achievement strong{color:#25465d;font-size:12px}.career-achievement small{color:#7a92a2;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.career-achievement .achievement-track{grid-column:2}.career-trophies{display:flex;gap:9px;margin-top:16px;padding-top:13px;border-top:1px solid #e2ebef}.career-trophies .trophy-chip{width:34px;height:34px}
+@media(max-width:900px){.career-social-grid{grid-template-columns:1fr}}
+.pitch{touch-action:none}.pitch-player{cursor:grab;user-select:none}.pitch-player.dragging{cursor:grabbing;filter:drop-shadow(0 0 13px rgba(117,221,201,.8));z-index:5}.pitch-player.dragging .pitch-player-head{box-shadow:0 0 0 7px rgba(117,221,201,.22),0 10px 20px rgba(0,0,0,.24)}
