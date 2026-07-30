@@ -175,9 +175,13 @@ function useManagerIdentity() {
 
 async function signOutManager() {
   await fetch("/api/auth/logout", { method: "POST", headers: { Accept: "application/json" } }).catch(() => undefined);
+  document.cookie = "fc_manager_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;";
+  window.localStorage.clear();
+  window.sessionStorage.clear();
   window.localStorage.setItem("fc-manager-logout-notice", "Você saiu da sua conta com segurança.");
   window.location.assign("/login");
 }
+
 
 function GameNav() {
   const pathname = usePathname();
