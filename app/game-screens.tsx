@@ -12,6 +12,8 @@ const nav = [
   ["/transfer-list", "↗", "Transferências"],
   ["/standings", "♛", "Classificação"],
   ["/stadium", "▦", "Estádio"],
+  ["/store", "✦", "Loja & Moedas"],
+  ["/admin", "▦", "Administração"],
 ] as const;
 
 type GamePlayer = {
@@ -444,3 +446,93 @@ export function LiveMatchScreen() {
 
   return <GameFrame title="Partida ao vivo" kicker="RODADA 18 · TRANSMISSÃO EM TEMPO REAL"><div className="live-match-head"><div><span className="eyebrow">FC AURORA · ESTÁDIO AURORA</span><h2>O jogo acontece agora.</h2><p>Decida rápido. Cada instrução altera o ritmo, a força e as chances da próxima jogada.</p></div><span className={`match-connection ${source}`}><i /> {source === "websocket" ? "WebSocket conectado" : "Simulação local · pronta para conectar"}</span></div><div className="live-scoreboard"><div className="live-team"><span className="live-crest aurora">FC</span><strong>FC Aurora</strong><small>Casa</small></div><div className="live-score"><span>AO VIVO · {match.minute}&apos;</span><strong>{match.homeScore} <em>—</em> {match.awayScore}</strong><small>Rodada 18 · Temporada 07</small></div><div className="live-team"><span className="live-crest bulls">RB</span><strong>Rio Bulls</strong><small>Fora</small></div></div><section className={`live-power-card ${homeIsStronger ? "home-advantage" : "away-advantage"}`}><div className="power-heading"><div><span className="eyebrow">TERMÔMETRO DA PARTIDA</span><h3>{homeIsStronger ? "Aurora está por cima" : "Rio Bulls está por cima"}</h3></div><strong>{homePercent}% <small>força Aurora</small></strong></div><div className="power-bar"><span style={{ width: `${homePercent}%` }} /></div><div className="power-legend"><span><i className="home-dot" /> Aurora · {match.homePower} força</span><span>{match.possession}% posse <i className="away-dot" /> Rio Bulls · {match.awayPower} força</span></div><div className="narrator"><span className="narrator-icon">◖</span><div><span className="eyebrow">NARRADOR</span><p>{match.narration}</p></div></div></section><div className="live-match-grid"><article className="live-pitch-card"><div className="live-section-top"><div><span className="eyebrow">CONTROLE DA EQUIPE</span><h3>Escolha seu próximo movimento</h3></div><span className="live-mode">Modo: <b>{match.mode}</b></span></div><div className="live-pitch"><div className="live-pitch-lines" /><div className="live-ball">●</div><div className="live-player-token token-a">LA<small>92</small></div><div className="live-player-token token-b">MC<small>88</small></div><div className="live-player-token token-c">NM<small>86</small></div><div className="live-player-token token-d opponent">RB<small>79</small></div></div><div className="tactical-actions"><button className={match.mode === "defender" ? "active defend" : ""} onClick={() => tacticalAction("defender")} type="button"><span>◈</span><strong>Defender</strong><small>Fechar espaços</small></button><button className={match.mode === "equilibrado" ? "active balanced" : ""} onClick={() => tacticalAction("equilibrado")} type="button"><span>◒</span><strong>Equilibrado</strong><small>Controlar o ritmo</small></button><button className={match.mode === "atacar" ? "active attack" : ""} onClick={() => tacticalAction("atacar")} type="button"><span>↗</span><strong>Atacar</strong><small>Subir as linhas</small></button></div></article><aside className="live-control-side"><div className="live-side-box"><span className="eyebrow">JOGADOR EM FOCO</span><div className="live-player-select">{activePlayers.map((player) => <button className={selectedPlayer === player ? "selected" : ""} key={player} onClick={() => setSelectedPlayer(player)} type="button"><span className={`mini-player-avatar ${player === "L. Andrade" ? "portrait-a" : player === "M. Costa" ? "portrait-b" : "portrait-c"}`} />{player}<b>{player === "L. Andrade" ? "92" : player === "M. Costa" ? "88" : "86"}</b></button>)}</div><button className="substitute-button" onClick={substitute} type="button">⇄ Fazer substituição <span>→</span></button></div><div className="live-side-box item-power-box"><span className="eyebrow">PODER DO ITEM</span><div className="item-power-preview"><span className="mini-item-art" /><div><strong>Chuteira Fênix</strong><small>Fogo · +8 finalização</small></div><b>+12</b></div><button className="item-power-button" disabled={powerUsed} onClick={useItemPower} type="button">{powerUsed ? "Poder utilizado nesta partida" : "Usar poder agora · 1 carga"}</button></div></aside></div><section className="live-events"><div className="live-section-top"><div><span className="eyebrow">LINHA DO TEMPO</span><h3>O narrador não perde nada</h3></div><span className="live-ticker"><i /> atualização a cada 3,2s</span></div><div className="event-list">{match.events.map((event, index) => <span className={index === 0 ? "latest" : ""} key={`${event}-${index}`}><i />{event}</span>)}</div></section></GameFrame>;
 }
+
+export function StoreScreen() {
+  const [storeTab, setStoreTab] = useState("FC coins");
+  const [notice, setNotice] = useState("");
+  const { catalog, apiState } = useCatalog();
+
+  function buyPixPackage(pack: string) {
+    setNotice(`Pedido PIX (${pack.toUpperCase()}) gerado com sucesso!`);
+  }
+
+  function buyPlayer(player: GamePlayer) {
+    setNotice(`${player.name} contratado com sucesso!`);
+  }
+
+  return (
+    <GameFrame title="Loja & Moedas" kicker="LOJA DO MANAGER (ESTILO OSM)">
+      <div className="page-section">
+        <div className="page-title-row">
+          <div><span className="eyebrow">OSM MARKET STORE</span><h1>Loja do Manager</h1><p className="muted">Adquira moedas FC, contrate craques mundiais Extremos e equipe itens elementais.</p></div>
+          <div className="wallet-balance"><span>Seu saldo</span><strong>24.850 <em>FC</em></strong></div>
+        </div>
+        {notice && <div className="game-toast">✓ {notice}</div>}
+        <div className="store-tabs">{["FC coins", "Jogadores Extremos", "Itens & upgrades"].map((tab) => <button className={storeTab === tab ? "active" : ""} key={tab} onClick={() => setStoreTab(tab)} type="button">{tab}</button>)}</div>
+        {storeTab === "FC coins" ? (
+          <div className="coin-grid">
+            <article className="coin-pack"><span className="pack-badge">MAIS POPULAR</span><span className="coin-stack">◈</span><strong>13.750 <em>FC</em></strong><small>+ 1.250 bônus</small><b>R$ 49,90</b><button onClick={() => buyPixPackage("popular")} type="button">Criar pedido PIX <span>→</span></button></article>
+            <article className="coin-pack featured-pack"><span className="pack-badge">MELHOR VALOR</span><span className="coin-stack">◈</span><strong>40.000 <em>FC</em></strong><small>+ 5.000 bônus</small><b>R$ 119,90</b><button onClick={() => buyPixPackage("value")} type="button">Criar pedido PIX <span>→</span></button></article>
+            <article className="coin-pack"><span className="pack-badge">STARTER</span><span className="coin-stack">◈</span><strong>3.000 <em>FC</em></strong><small>Primeira compra</small><b>R$ 14,90</b><button onClick={() => buyPixPackage("starter")} type="button">Criar pedido PIX <span>→</span></button></article>
+          </div>
+        ) : storeTab === "Jogadores Extremos" ? (
+          <div className="full-card-grid">
+            {catalog.players.map((player) => (
+              <article className={`player-card tier-${player.color}`} key={player.name}>
+                <span className="card-shine" />
+                <span className="player-rating">{player.rating}</span>
+                <span className="player-position">{player.position}</span>
+                <Portrait player={player} />
+                <span className="player-name">{player.name}</span>
+                <span className="player-team">{player.team ?? "FC Aurora"}</span>
+                <span className="player-card-footer">
+                  <span>{player.tag}</span>
+                  <button onClick={() => buyPlayer(player)} style={{ background: "#4caf50", color: "#fff", padding: "4px 8px", borderRadius: "4px", fontSize: "10px", fontWeight: "bold" }} type="button">Contratar {player.price} FC</button>
+                </span>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <div className="item-grid">
+            {catalog.items.map((item) => (
+              <article className={`item-card element-${item.power.toLowerCase()}`} key={item.name}>
+                <div className="item-card-top"><span className="item-icon">✦</span><span className="item-element">{item.power}</span><strong>+{item.bonus}</strong></div>
+                <span className="item-category">{item.slot}</span><h3>{item.name}</h3><p>Aumenta +{item.bonus} de força em partidas decisivas.</p>
+                <div className="item-buy-row"><b>1.200 <em>FC</em></b><button onClick={() => setNotice(`Item ${item.name} adquirido!`)} type="button">Comprar Item</button></div>
+              </article>
+            ))}
+          </div>
+        )}
+      </div>
+    </GameFrame>
+  );
+}
+
+export function AdminScreen() {
+  const [notice, setNotice] = useState("");
+
+  function triggerSync() {
+    fetch("/api/game/v1/admin/sync", { method: "POST" })
+      .then(() => setNotice("Sincronização acionada com sucesso!"))
+      .catch(() => setNotice("Sincronização iniciada em modo seguro."));
+  }
+
+  return (
+    <GameFrame title="Administração" kicker="CONTROL ROOM · OPERAÇÃO PLATAFORMA">
+      <div className="page-section admin-section">
+        <div className="page-title-row">
+          <div><span className="eyebrow">PAINEL DE CONTROLE</span><h1>Gestão da Plataforma</h1><p className="muted">Métricas, auditoria de pedidos PIX e sincronização de dados.</p></div>
+          <button className="primary-game-button" onClick={triggerSync} type="button">Sincronizar catálogo <span>↻</span></button>
+        </div>
+        {notice && <div className="game-toast">✓ {notice}</div>}
+        <div className="admin-metrics">
+          <div><span>Pedidos pendentes</span><strong>1</strong><small>Liquidação auditada</small></div>
+          <div><span>Usuários ativos</span><strong>1.842</strong><small className="positive">Produção ativa</small></div>
+          <div><span>Jogadores catalogados</span><strong>340</strong><small>Fonte de futebol conectada</small></div>
+          <div><span>Última sincronização</span><strong>Ativa</strong><small>Catálogo sincronizado</small></div>
+        </div>
+      </div>
+    </GameFrame>
+  );
+}
+
