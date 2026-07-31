@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import "./game-atmosphere.css";
+import "./landing-skin.css";
 
 export const metadata: Metadata = {
   title: "FC Manager Online | Gerencie sua lenda",
