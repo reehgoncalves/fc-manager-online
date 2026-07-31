@@ -248,6 +248,74 @@ function LandingPage() {
         <div className="landing-match-card"><div className="landing-match-top"><span>PRÓXIMA PARTIDA</span><b><i /> AO VIVO EM 18:42:12</b></div><div className="landing-match-stage"><div className="landing-club"><span className="landing-crest aurora">FC</span><strong>FC Aurora</strong><small>Casa · Força 92</small></div><div className="landing-score"><span>DOM · 20:30</span><strong>VS</strong><small>Estádio Aurora</small></div><div className="landing-club"><span className="landing-crest bulls">RM</span><strong>Real Madrid</strong><small>Fora · Força 94</small></div></div><div className="landing-match-foot"><span>Rodada 18 · Liga dos Campeões</span><Link href="/login">Preparar time →</Link></div></div>
       </section>
 
+      {/* Mini Craques 3D Showcase */}
+      <section className="landing-mini-craques-banner" style={{
+        margin: "40px auto",
+        padding: "32px 24px",
+        background: "linear-gradient(135deg, rgba(63,201,116,0.15) 0%, rgba(10,26,14,0.95) 50%, rgba(255,215,0,0.12) 100%)",
+        borderRadius: "24px",
+        border: "1px solid var(--gold)",
+        boxShadow: "0 0 40px rgba(255,215,0,0.25), inset 0 0 20px rgba(63,201,116,0.2)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        maxWidth: "1100px",
+        flexWrap: "wrap",
+        gap: "24px",
+        position: "relative",
+        overflow: "hidden"
+      }}>
+        <div style={{ flex: "1 1 340px", zIndex: 2 }}>
+          <span style={{
+            background: "linear-gradient(90deg, #ffd700, #ff755e)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            fontWeight: 800,
+            fontSize: "13px",
+            letterSpacing: "0.1em",
+            textTransform: "uppercase"
+          }}>⚡ EDIÇÃO DE COLECIONADOR 3D</span>
+          <h2 style={{ fontSize: "32px", fontWeight: 900, color: "#fff", margin: "8px 0 12px", fontFamily: "'Saira Condensed', sans-serif" }}>
+            MINI CRAQUES EXCLUSIVOS FC 2026
+          </h2>
+          <p style={{ color: "rgba(255,255,255,0.75)", fontSize: "14px", lineHeight: "1.6", margin: 0 }}>
+            Colecione as miniaturas 3D reais dos maiores craques do futebol mundial! Equipe em campo e ative super poderes de Fogo, Gelo e Raio em tempo real nas partidas.
+          </p>
+        </div>
+        <div style={{ display: "flex", gap: "20px", alignItems: "center", justifyContent: "center", zIndex: 2 }}>
+          <div style={{ position: "relative", textAlign: "center" }}>
+            <img src="/assets/mini-craque-star.png" alt="Mini Craque Estrela" style={{
+              width: "110px",
+              height: "140px",
+              objectFit: "contain",
+              filter: "drop-shadow(0 0 15px rgba(255,215,0,0.8))",
+              animation: "floatSlow 3s ease-in-out infinite"
+            }} />
+            <span style={{ display: "block", fontSize: "10px", fontWeight: 800, color: "#ffd700", marginTop: "4px" }}>CRAQUE OURO</span>
+          </div>
+          <div style={{ position: "relative", textAlign: "center" }}>
+            <img src="/assets/mini-craque-home.png" alt="Mini Craque Brasil" style={{
+              width: "125px",
+              height: "155px",
+              objectFit: "contain",
+              filter: "drop-shadow(0 0 20px rgba(63,201,116,0.9))",
+              animation: "floatSlow 3s ease-in-out infinite 0.5s"
+            }} />
+            <span style={{ display: "block", fontSize: "11px", fontWeight: 900, color: "#3fc974", marginTop: "4px" }}>MINI CANARINHO</span>
+          </div>
+          <div style={{ position: "relative", textAlign: "center" }}>
+            <img src="/assets/mini-craque-away.png" alt="Mini Craque Azul" style={{
+              width: "110px",
+              height: "140px",
+              objectFit: "contain",
+              filter: "drop-shadow(0 0 15px rgba(98,200,255,0.8))",
+              animation: "floatSlow 3s ease-in-out infinite 1s"
+            }} />
+            <span style={{ display: "block", fontSize: "10px", fontWeight: 800, color: "#62c8ff", marginTop: "4px" }}>MINI GLACIAL</span>
+          </div>
+        </div>
+      </section>
+
       {/* Star Players Showcase */}
       <section className="landing-stars" id="craques">
         <div className="landing-stars-header">
